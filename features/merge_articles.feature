@@ -12,8 +12,6 @@ Scenario: A non-admin cannot merge articles
 	And I should not see //input[@name="merge_with"]
 
 Scenario: When articles are merged, the merged article should contain the text of both previous articles
-	Given I am logged into the admin panel
-	
 
 Scenario: When articles are merged, the merged article should have one author (either one of the authors of the original article)
 
