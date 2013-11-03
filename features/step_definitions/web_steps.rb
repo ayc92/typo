@@ -41,6 +41,12 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+  User.create!({:login => 'nonadmin',
+                :password => 'bbbbbbbb',
+                :email => 'wohf@snow.com',
+                :profile_id => 2,
+                :name => 'nonadmin',
+                :state => 'active'})
 end
 
 And /^I am logged into the admin panel$/ do
@@ -56,7 +62,15 @@ And /^I am logged into the admin panel$/ do
 end
 
 Given /^I am not logged into the admin panel$/ do
-
+  visit '/accounts/login'
+  fill_in 'user_login', :with => 'nonadmin'
+  fill_in 'user_password', :with => 'bbbbbbbb'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
 end
 
 # Single-line step scoper

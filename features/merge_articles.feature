@@ -13,9 +13,19 @@ Scenario: A non-admin cannot merge articles
 
 Scenario: When articles are merged, the merged article should contain the text of both previous articles
 	Given I am logged into the admin panel
-	
+	And I am on the edit page for article 3
+	Then when I fill in "Article ID" with "5"
+	And I press "Merge"
+	Then I should see the content of article 3
+	and I should see the content of article 5
 
 Scenario: When articles are merged, the merged article should have one author (either one of the authors of the original article)
+	Given I am logged into the admin panel
+	And I am on the edit page for article 3
+	Then when I fill in "Article ID" with "5"
+	And I press "Merge"
+	Then I should be on the edit page for article 3
+	and I should see the author of article 3
 
 Scenario: Comments on each of the two original articles need to all carry over and point to the new, merged article
 
