@@ -468,6 +468,13 @@ class Article < Content
   end
 
   def merge(target_id)
-    
+    target = Article.find(target_id)
+    self.body = self.body + " " + target.body
+    target.comments.all.each do |c|
+      c.article_id = self.id
+      c.save
+    end
+    target.destroy
+    self.save
   end
 end
