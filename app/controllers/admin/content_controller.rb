@@ -6,6 +6,12 @@ class Admin::ContentController < Admin::BaseController
 
   cache_sweeper :blog_sweeper
 
+  def merge
+    @article = Article.find(params[:id])
+    @article.merge params[:merge_with]
+    redirect_to "/admin/content/edit/#{@article.id}"
+  end
+
   def auto_complete_for_article_keywords
     @items = Tag.find_with_char params[:article][:keywords].strip
     render :inline => "<%= raw auto_complete_result @items, 'name' %>"
@@ -24,6 +30,7 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def new
+    @form_type = "new"
     new_or_edit
   end
 
@@ -34,6 +41,7 @@ class Admin::ContentController < Admin::BaseController
       flash[:error] = _("Error, you are not allowed to perform this action")
       return
     end
+    @form_type = "edit"
     new_or_edit
   end
 
