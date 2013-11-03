@@ -48,7 +48,7 @@ gem 'recaptcha', :require => 'recaptcha/rails', :branch => 'rails3'
 group :development, :test do
   gem 'ruby-debug19'
   gem 'factory_girl', '~> 2.2'
-  gem 'webrat'
+  # gem 'webrat'
   gem 'rspec-rails', '~> 2.0'
   gem 'simplecov', :require => false
   gem 'sqlite3'

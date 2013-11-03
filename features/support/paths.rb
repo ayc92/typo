@@ -18,8 +18,12 @@ module NavigationHelpers
     when /^the new article page$/
       '/admin/content/new'
 
-    when /^the edit page for article ([1-9][0-9]+)$/
-      '/admin/content/edit/#{$1}'
+    when /^the edit page for article ([1-9][0-9]*)$/
+      "/admin/content/edit/#{$1}"
+
+    when /^the page for article ([1-9][0-9]*)$/
+      date = Article.find($1).published_at
+      "/#{date}/#{$1}"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -35,18 +35,35 @@ Given /^the blog is set up$/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});
   Blog.default.save!
-  User.create!({:login => 'admin',
-                :password => 'aaaaaaaa',
-                :email => 'joe@snow.com',
-                :profile_id => 1,
-                :name => 'admin',
-                :state => 'active'})
-  User.create!({:login => 'nonadmin',
-                :password => 'bbbbbbbb',
-                :email => 'wohf@snow.com',
-                :profile_id => 2,
-                :name => 'nonadmin',
-                :state => 'active'})
+  admin_prof = Profile.create!({:id => 1,
+                                :label => Profile::ADMIN})
+  nonadmin_prof = Profile.create!({:id => 2})
+  admin = User.create!({:login => 'admin',
+                        :password => 'aaaaaaaa',
+                        :email => 'joe@snow.com',
+                        :profile_id => 1,
+                        :name => 'admin',
+                        :state => 'active'})
+  nonadmin = User.create!({:login => 'nonadmin',
+                           :password => 'bbbbbbbb',
+                           :email => 'wohf@snow.com',
+                           :profile_id => 2,
+                           :name => 'nonadmin',
+                           :state => 'active'})
+  art1 = Article.create!({:id => 3,
+                          :title => 'article1',
+                          :body => 'This is article1.',
+                          :user_id => admin.id})
+  art2 = Article.create!({:id => 5,
+                          :title => 'article2',
+                          :body => 'This is article2.',
+                          :user_id => admin.id})
+  cmt1 = Comment.create!({:author => 'bob',
+                          :body => 'This is comment1',
+                          :article_id => art1.id})
+  cmt2 = Comment.create!({:author => 'bob',
+                          :body => 'This is comment2',
+                          :article_id => art2.id})
 end
 
 And /^I am logged into the admin panel$/ do
