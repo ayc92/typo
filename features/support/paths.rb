@@ -23,6 +23,7 @@ module NavigationHelpers
 
     when /^the page for article ([1-9][0-9]*)$/
       date = Article.find($1).published_at
+      puts date
       "/#{date}/#{$1}"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

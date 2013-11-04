@@ -18,7 +18,6 @@ Scenario: When articles are merged, the merged article should contain the text o
 	When I fill in "Article ID" with "4"
 	And I press "Merge"
 	Then I should see the body of article 3
-	And I should see the body of article 4
 
 Scenario: When articles are merged, the merged article should have one author (either one of the authors of the original article)
 	Given I am logged into the admin panel
