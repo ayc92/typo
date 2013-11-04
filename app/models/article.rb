@@ -61,6 +61,17 @@ class Article < Content
 
   setting :password,                   :string, ''
 
+  def merge(target_id)
+    target = Article.find(target_id)
+    self.body = self.body + " " + target.body
+    target.comments.all.each do |c|
+      c.article_id = self.id
+      c.save
+    end
+    target.destroy
+    self.save
+  end
+
   def initialize(*args)
     super
     # Yes, this is weird - PDC
@@ -465,16 +476,5 @@ class Article < Content
     to = from + 1.day unless day.blank?
     to = to - 1 # pull off 1 second so we don't overlap onto the next day
     return from..to
-  end
-
-  def merge(target_id)
-    target = Article.find(target_id)
-    self.body = self.body + " " + target.body
-    target.comments.all.each do |c|
-      c.article_id = self.id
-      c.save
-    end
-    target.destroy
-    self.save
   end
 end
