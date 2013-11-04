@@ -47,12 +47,10 @@ Given /^the blog is set up$/ do
                            :profile_id => 2,
                            :name => 'nonadmin',
                            :state => 'active'})
-  art1 = Article.create!({:id => 3,
-                          :title => 'article1',
+  art1 = Article.create!({:title => 'article1',
                           :body => 'This is article1.',
                           :user_id => admin.id})
-  art2 = Article.create!({:id => 5,
-                          :title => 'article2',
+  art2 = Article.create!({:title => 'article2',
                           :body => 'This is article2.',
                           :user_id => admin.id})
   cmt1 = Comment.create!({:author => 'bob',
@@ -61,6 +59,7 @@ Given /^the blog is set up$/ do
   cmt2 = Comment.create!({:author => 'bob',
                           :body => 'This is comment2',
                           :article_id => art2.id})
+  puts Article.all
 end
 
 And /^I am logged into the admin panel$/ do
