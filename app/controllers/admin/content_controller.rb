@@ -8,13 +8,13 @@ class Admin::ContentController < Admin::BaseController
 
   def merge
     @article = Article.find(params[:id])
-    unless current_user.admin?
+    unless current_user.admin? && params[:merge_with] != ""
       redirect_to :action => 'index'
       flash[:error] = _("Error, you are not allowed to perform this action")
       return
     end
     @article.merge params[:merge_with]
-    redirect_to "/admin/content/edit/#{@article.id}"
+    redirect_to action: "edit", id: @article.id
   end
 
   def auto_complete_for_article_keywords
