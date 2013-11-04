@@ -35,9 +35,6 @@ Given /^the blog is set up$/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});
   Blog.default.save!
-  admin_prof = Profile.create!({:id => 1,
-                                :label => Profile::ADMIN})
-  nonadmin_prof = Profile.create!({:id => 2})
   admin = User.create!({:login => 'admin',
                         :password => 'aaaaaaaa',
                         :email => 'joe@snow.com',
