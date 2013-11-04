@@ -1,8 +1,3 @@
-
-<% if @form_type == "new" %>
 <% @page_heading = _('New article') %>
-<% else %>
-<% @page_heading = _(@article.title) %>
-<% end %>
 
 <%= render "admin/shared/edit", { :form_type => "article", :form_action => { :action => "new", :id => @article.id , :class => ('autosave')} } %>
