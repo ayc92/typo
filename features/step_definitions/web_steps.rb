@@ -59,7 +59,6 @@ Given /^the blog is set up$/ do
   cmt2 = Comment.create!({:author => 'bob',
                           :body => 'This is comment2',
                           :article_id => art2.id})
-  puts Article.all
 end
 
 And /^I am logged into the admin panel$/ do
